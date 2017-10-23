@@ -1,0 +1,13 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.view {
+	width: 100%;
+	height: 90vh;
+}
+
+.head {
+	color: red;
+}

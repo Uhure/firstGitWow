@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="b">
+<head>
+	<title>b - beta</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+	<a ui-sref="home()">Homey</a>
+	<a ui-sref="about()">About</a>
+
+	<ui-view class="view"></ui-view>
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="lib/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
+
+	<!-- Visualixer -->
+	<script type="text/javascript" src="https://unpkg.com/show-current-browser-url@1.0.7"></script>
+	<script type="text/javascript" src="https://unpkg.com/d3@3.5.17"></script>
+	<script type="text/javascript" src="https://unpkg.com/@uirouter/visualizer@4.0.2"></script>
+
+	<script type="text/javascript">
+		(function( angular ) {
+			'use strict';
+
+			angular
+				.module('b', ['ui.router'])
+
+				// Configuration
+				.config(['$stateProvider', function( $stateProvider ) {
+					var states = [
+						// Home
+						{
+							name: 'home',
+							url: '/home',
+							component: 'home'
+							// template: '<h1>Hi this is boring</h1>'
+						},
+						// About
+						{
+							name: 'about',
+							url: '/about',
+							component: 'about'
+							// template: '<h3>I know right</h3>'
+						},
+						// About Them
+						{
+							name: 'about.them',
+							url: '/aboutThem',
+							component: 'aboutThem'
+							// template: '<h3>I know right</h3>'
+						},
+						// About Us
+						{
+							name: 'about.us',
+							url: '/aboutUs',
+							component: 'aboutUs'
+							// template: '<h3>I know right</h3>'
+						}
+					];
+
+					states.forEach( function( state ) {
+						$stateProvider.state( state );
+					});
+				}])
+				.run( run );
+
+				function run($uiRouter) {
+					var Visualizer = window['ui-router-visualizer'].Visualizer;
+			  		$uiRouter.plugin(Visualizer);
+				}
+
+				// .component('home', {
+				// 	templateUrl: 'js/partials/home.html'
+				// });
+		})( window.angular );
+	</script>
+
+	<script type="text/javascript">
+		(function( angular ) {
+			'use strict';
+			angular
+				.module('b')
+				.component('home', {
+					// template: '<h1>Hi there, Welcome..</h1>'
+					templateUrl: 'js/partials/home.html'
+				})
+				.component('about', {
+					// template: '<h1>Hi there, this is about us..</h1>'
+					templateUrl: 'js/partials/about.html'
+				})
+				.component('aboutThem', {
+					// template: '<h1>Hi there, this is about us..</h1>'
+					templateUrl: 'js/partials/aboutThem.html'
+				})
+				.component('aboutUs', {
+					// template: '<h1>Hi there, this is about us..</h1>'
+					templateUrl: 'js/partials/aboutUs.html'
+				});
+		})( window.angular );
+	</script>
+</body>
+</html>
